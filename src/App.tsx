@@ -1,34 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState } from 'react';
+import SendbirdProvider from '@sendbird/uikit-react/SendbirdProvider'
+import ChannelList from '@sendbird/uikit-react/ChannelList';
+import Channel from '@sendbird/uikit-react/Channel';
+
 import './App.css'
+import '@sendbird/uikit-react/dist/index.css'
+
+// import.meta.env is vite specific
+// see https://vitejs.dev/guide/env-and-mode.html#env-variables
+const APP_ID = import.meta.env.VITE_APP_ID ?? ''
+const USER_ID = import.meta.env.VITE_USER_ID ?? ''
+const NICKNAME = import.meta.env.VITE_NICKNAME ?? ''
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [channelUrl, setChannelUrl] = useState<string>('')
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <SendbirdProvider
+        appId={APP_ID}
+        userId={USER_ID}
+        nickname={NICKNAME}
+      >
+        <div className='sendbird-support-chat'>
+          <div className='sendbird-support-chat__channel-list'>
+            <ChannelList
+              onChannelSelect={(channel) => setChannelUrl(channel?.url)}
+            />
+          </div>
+          <div className='sendbird-support-chat__channel'>
+            <Channel channelUrl={channelUrl} />
+          </div>
+        </div>
+      </SendbirdProvider>
   )
 }
 
