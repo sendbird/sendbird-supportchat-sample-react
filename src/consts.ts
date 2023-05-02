@@ -3,4 +3,4 @@
 export const APP_ID = import.meta.env.VITE_APP_ID ?? ''
 export const USER_ID = import.meta.env.VITE_USER_ID ?? ''
 export const NICKNAME = import.meta.env.VITE_NICKNAME ?? ''
-export const API_URL = import.meta.env.VITE_API_URL ?? ''
+export const SALESFORCE_API_URL = import.meta.env.VITE_SALESFORCE_API_URL ?? ''

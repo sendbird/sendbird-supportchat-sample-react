@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import useSendbirdStateContext from '@sendbird/uikit-react/useSendbirdStateContext'
 import sendbirdSelectors from '@sendbird/uikit-react/sendbirdSelectors'
-import { API_URL, NICKNAME, USER_ID } from '../consts'
+import { SALESFORCE_API_URL, NICKNAME, USER_ID } from '../consts'
 import { getRandomChannelName } from '../utils'
 
 export default function ChannelListHeader() {
@@ -24,9 +24,12 @@ export default function ChannelListHeader() {
             name: title,
           })
             .then((channel) =>
-              fetch(`${API_URL}/cases/`, {
+              fetch(`${SALESFORCE_API_URL}/services/apexrest/cases`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Acess-Control-Allow-Origin': '*',
+                },
                 body: JSON.stringify({
                   subject: title,
                   suppliedName: NICKNAME,
