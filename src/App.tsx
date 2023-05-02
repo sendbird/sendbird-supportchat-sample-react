@@ -18,6 +18,7 @@ function App() {
       appId={APP_ID}
       userId={USER_ID}
       nickname={NICKNAME}
+      isVoiceMessageEnabled={false}
     >
       <div className='sendbird-support-chat'>
         <div className='sendbird-support-chat__channel-list'>

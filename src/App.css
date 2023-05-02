@@ -73,3 +73,10 @@
 .sendbird-channel-profile__edit {
   display: none;
 }
+
+/**
+  Channel settings disable invite button
+*/
+.sendbird-channel-settings-member-list .sendbird-channel-settings-accordion__footer {
+  display: none;
+}
