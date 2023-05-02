@@ -42,6 +42,13 @@
 .sb-channel-list-header__button:hover {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 8px;
 }
+.sb-channel-list-header__button:disabled {
+  cursor: not-allowed;
+  box-shadow: none !important;
+}
+.sb-channel-list-header__hidden_img {
+  display: none;
+}
 
 /**
   disable the actions in channel-preview

@@ -7,8 +7,8 @@ import ChannelSettings from '@sendbird/uikit-react/ChannelSettings';
 import '@sendbird/uikit-react/dist/index.css'
 import './App.css'
 
-import ChannelListHeader from './components/ChannelListHeader'
-import { APP_ID, USER_ID, NICKNAME } from './consts'
+import ChannelListHeader from './ChannelListHeader'
+import { APP_ID, USER_ID, NICKNAME } from '../consts'
 
 function App() {
   const [channelUrl, setChannelUrl] = useState<string>('')

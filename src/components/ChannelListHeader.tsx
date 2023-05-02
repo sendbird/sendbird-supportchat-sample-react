@@ -1,12 +1,15 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 import useSendbirdStateContext from '@sendbird/uikit-react/useSendbirdStateContext'
 import sendbirdSelectors from '@sendbird/uikit-react/sendbirdSelectors'
-import { SALESFORCE_API_URL, NICKNAME, USER_ID } from '../consts'
+import { SALESFORCE_API_URL, NICKNAME, USER_ID, SALESFORCE_SUPPORT_CHAT_CHANNEL } from '../consts'
 import { getRandomChannelName } from '../utils'
+import { useGetCoverImg } from './hooks/useGetCoverImg'
 
 export default function ChannelListHeader() {
   const [ loading, setLoading ] = useState(false)
+  const imgRef = useRef<HTMLImageElement>(null)
+  const getCoverImage = useGetCoverImg(imgRef)
   const store = useSendbirdStateContext()
   const createGroupChannel = sendbirdSelectors.getCreateGroupChannel(store)
   return (
@@ -18,17 +21,18 @@ export default function ChannelListHeader() {
         onClick={() => {
           setLoading(true)
           const title = getRandomChannelName()
+          const coverImg = getCoverImage()
           createGroupChannel({
-            customType: 'SALESFORCE_SUPPORT_CHAT_CHANNEL',
+            customType: SALESFORCE_SUPPORT_CHAT_CHANNEL,
             invitedUserIds: [USER_ID],
             name: title,
+            coverUrl: coverImg,
           })
             .then((channel) =>
-              fetch(`${SALESFORCE_API_URL}/services/apexrest/cases`, {
+              fetch(`${SALESFORCE_API_URL}/services/apexrest/cases/`, {
                 method: 'POST',
                 headers: {
-                  'Content-Type': 'application/json',
-                  'Acess-Control-Allow-Origin': '*',
+                  'Referrer-Policy': 'no-referrer',
                 },
                 body: JSON.stringify({
                   subject: title,
@@ -45,6 +49,11 @@ export default function ChannelListHeader() {
             .finally(() => setLoading(false))
         }}
       >Start chat</button>
+      <img
+        className='sb-channel-list-header__hidden_img'
+        src='../assets/channel-cover.jpg'
+        ref={imgRef}
+      />
     </div>
   )
 }
