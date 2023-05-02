@@ -72,3 +72,17 @@ fetch(`${SALESFORCE_API_URL}/services/apexrest/cases/`, {
 
 > See `src/components/App.css` to see how we hide certain menus.
 > Other features were disabled by passing `disable*` props to the components.
+
+## To deploy to gh-pages(For Sendbird Devs)
+
+(to do: Move to github actions)
+
+1. Delete remote gh-pages branch
+2. Run `npm run build`
+!important: Make sure you have the `base` in `vite.config.ts` set to
+ `sendbird-supportchat-sample-react` (this is the name of the repo)
+ before building the project.
+3. run `git add dist -f`
+4. run `git subtree push --prefix dist origin gh-pages`
+
+> TLDR: Build the project and push the dist folder to gh-pages branch
