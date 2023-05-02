@@ -1,36 +1,50 @@
 import { useState } from 'react';
 import SendbirdProvider from '@sendbird/uikit-react/SendbirdProvider'
-import ChannelList from '@sendbird/uikit-react/ChannelList';
-import Channel from '@sendbird/uikit-react/Channel';
+import ChannelList from '@sendbird/uikit-react/ChannelList'
+import Channel from '@sendbird/uikit-react/Channel'
+import ChannelSettings from '@sendbird/uikit-react/ChannelSettings';
 
-import './App.css'
 import '@sendbird/uikit-react/dist/index.css'
+import './App.css'
 
-// import.meta.env is vite specific
-// see https://vitejs.dev/guide/env-and-mode.html#env-variables
-const APP_ID = import.meta.env.VITE_APP_ID ?? ''
-const USER_ID = import.meta.env.VITE_USER_ID ?? ''
-const NICKNAME = import.meta.env.VITE_NICKNAME ?? ''
+import ChannelListHeader from './components/ChannelListHeader'
+import { APP_ID, USER_ID, NICKNAME } from './consts'
 
 function App() {
   const [channelUrl, setChannelUrl] = useState<string>('')
+  const [showSetting, setShowSetting] = useState<boolean>(false)
   return (
     <SendbirdProvider
-        appId={APP_ID}
-        userId={USER_ID}
-        nickname={NICKNAME}
-      >
-        <div className='sendbird-support-chat'>
-          <div className='sendbird-support-chat__channel-list'>
-            <ChannelList
-              onChannelSelect={(channel) => setChannelUrl(channel?.url)}
-            />
-          </div>
-          <div className='sendbird-support-chat__channel'>
-            <Channel channelUrl={channelUrl} />
-          </div>
+      appId={APP_ID}
+      userId={USER_ID}
+      nickname={NICKNAME}
+    >
+      <div className='sendbird-support-chat'>
+        <div className='sendbird-support-chat__channel-list'>
+          <ChannelList
+            onChannelSelect={(channel) => setChannelUrl(channel?.url)}
+            renderHeader={ChannelListHeader}
+            isTypingIndicatorEnabled
+          />
         </div>
-      </SendbirdProvider>
+        <div className='sendbird-support-chat__channel'>
+          <Channel
+            channelUrl={channelUrl}
+            onChatHeaderActionClick={() => setShowSetting(!showSetting)}
+          />
+        </div>
+        {
+          showSetting && (
+            <div className='sendbird-support-chat__settings'>
+              <ChannelSettings
+                channelUrl={channelUrl}
+                onCloseClick={() => setShowSetting(false)}
+              />
+            </div>
+          )
+        }
+      </div>
+    </SendbirdProvider>
   )
 }
 

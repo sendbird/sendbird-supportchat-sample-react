@@ -1,6 +1,6 @@
 export const CHANNEL_NAMES = [
   'Help me please',
-  'It’s getting more difficult',
+  'It\'s getting more difficult',
   'Serious help needed',
   'Why is this happening to me?',
   'Hello?',
