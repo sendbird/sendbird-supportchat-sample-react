@@ -77,12 +77,14 @@ fetch(`${SALESFORCE_API_URL}/services/apexrest/cases/`, {
 
 (to do: Move to github actions)
 
-1. Delete remote gh-pages branch
-2. Run `npm run build`
+1. Delete remote gh-pages branch in remote and local
+2. `npm run build`
 !important: Make sure you have the `base` in `vite.config.ts` set to
  `sendbird-supportchat-sample-react` (this is the name of the repo)
  before building the project.
-3. run `git add dist -f`
-4. run `git subtree push --prefix dist origin gh-pages`
+3. `git checkout -b gh-pages`
+4. `git add dist -f`
+5. `git commit -m "release: notes"`
+6. `git subtree push --prefix dist origin gh-pages`
 
 > TLDR: Build the project and push the dist folder to gh-pages branch
