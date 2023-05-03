@@ -66,6 +66,12 @@
 .sendbird-message-item-menu__list__menu-item.menu-item-delete {
   display: none;
 }
+.sendbird-fileviewer__header__right__actions__delete {
+  display: none;
+}
+.sendbird-msg-hoc:has(.sendbird-thumbnail-message-item-body) .sendbird-context-menu {
+  display: none !important;
+}
 
 /*
   disable the leave channel action
