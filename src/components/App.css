@@ -72,6 +72,9 @@
 .sendbird-msg-hoc:has(.sendbird-thumbnail-message-item-body) .sendbird-context-menu {
   display: none !important;
 }
+.sendbird-msg-hoc:has(.sendbird-file-message-item-body) .sendbird-context-menu {
+  display: none !important;
+}
 
 /*
   disable the leave channel action
