@@ -1,4 +1,4 @@
-# Sendbird Support Chat Sample for React
+# Sendbird Support Chat Sample for React ~ Test
 This is an example of [Sendbird Support Chat](https://sendbird.com/docs/support-chat/v1/overview) for React, implemented using [Sendbird UIKit](https://sendbird.com/docs/uikit/v3/react/overview).
 <p>
 Sendbird Support Chat: Salesforce Connector is a Sendbird Chat integration into your existing Salesforce Service Cloud that offers support focused chat experience with vast new features for agent productivity. With this Support Chat Salesforce sample app, you can quick start your client-side implementation.
