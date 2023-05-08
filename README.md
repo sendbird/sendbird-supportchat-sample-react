@@ -6,6 +6,8 @@ Sendbird Support Chat: Salesforce Connector is a Sendbird Chat integration into 
 
 # Getting started
 
+> For sendbird developers: -> Internal docs: https://sendbird.atlassian.net/l/cp/Xm82koTf
+
 ## Requirements
 
 ```
