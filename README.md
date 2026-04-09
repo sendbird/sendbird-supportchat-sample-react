@@ -11,8 +11,8 @@ Sendbird Support Chat: Salesforce Connector is a Sendbird Chat integration into 
 ## Requirements
 
 ```
-node > 16.17.1
-npm > 8
+node ^20.19.0 || >=22.12.0
+npm >= 10
 yarn can be used too
 ```
 
@@ -26,8 +26,7 @@ sendbird support chat in your salesforce org.
 3. Create a `.env` file in the root directory of the project.
   a. Use `.env.example` as a reference
   b. Fill in the values for the variables in `.env` file.
-4. Install the project with `npm install`.
-5. Run the project with `npm run dev`.
+4. Run the project with `npm run dev`.
 
 For more information, see [our documentation](https://sendbird.com/docs/support-chat/v1/salesforce-connector/integrate-with-salesforce-service-cloud#2-step-5-client-side-implementation).
 
@@ -82,7 +81,7 @@ fetch(`${SALESFORCE_API_URL}/services/apexrest/cases/`, {
 1. Delete remote gh-pages branch in remote and local
 2. `npm run build`
 !important: Make sure you have the `base` in `vite.config.ts` set to
- `sendbird-supportchat-sample-react` (this is the name of the repo)
+ `/sendbird-supportchat-sample-react/` (this is the name of the repo)
  before building the project.
 3. `git checkout -b gh-pages`
 4. `git add dist -f`

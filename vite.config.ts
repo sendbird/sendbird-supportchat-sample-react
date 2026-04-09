@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   // to point to correct path for gh-pages
-  base: 'sendbird-supportchat-sample-react',
+  base: '/sendbird-supportchat-sample-react/',
   server: {
     port: 3000,
   },
