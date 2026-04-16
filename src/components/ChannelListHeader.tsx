@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react'
 
-import useSendbirdStateContext from '@sendbird/uikit-react/useSendbirdStateContext'
-import sendbirdSelectors from '@sendbird/uikit-react/sendbirdSelectors'
+import { useSendbird } from '@sendbird/uikit-react'
 import {
   SALESFORCE_API_URL,
   NICKNAME,
@@ -14,8 +13,8 @@ import { getRandomChannelName } from '../utils'
 export default function ChannelListHeader() {
   const [ loading, setLoading ] = useState(false)
   const imgRef = useRef<HTMLImageElement>(null)
-  const store = useSendbirdStateContext()
-  const createGroupChannel = sendbirdSelectors.getCreateGroupChannel(store)
+  const { state } = useSendbird()
+  const sdk = state?.stores?.sdkStore?.sdk
   return (
     <div className='sb-channel-list-header'>
       <div className='sb-channel-list-header__header'>Channels</div>
@@ -23,15 +22,16 @@ export default function ChannelListHeader() {
         className='sb-channel-list-header__button'
         disabled={loading}
         onClick={() => {
+          if (!sdk?.groupChannel) return
           setLoading(true)
           const title = getRandomChannelName()
-          createGroupChannel({
+          sdk.groupChannel.createChannel({
             customType: SALESFORCE_SUPPORT_CHAT_CHANNEL,
             invitedUserIds: [USER_ID],
             name: title,
             coverUrl: CHANNEL_COVER_IMAGE,
           })
-            .then((channel) =>
+            .then((channel: { url: string }) =>
               fetch(`${SALESFORCE_API_URL}/services/apexrest/cases/`, {
                 method: 'POST',
                 headers: {
@@ -46,9 +46,9 @@ export default function ChannelListHeader() {
                 }),
               })
             )
-            .then((response) => response.json())
-            .then((data) => console.log('Case:', data))
-            .catch((error) => console.error('Error:', error))
+            .then((response: Response) => response.json())
+            .then((data: unknown) => console.log('Case:', data))
+            .catch((error: unknown) => console.error('Error:', error))
             .finally(() => setLoading(false))
         }}
       >Start chat</button>

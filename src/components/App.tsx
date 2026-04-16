@@ -23,7 +23,7 @@ function App() {
       <div className='sendbird-support-chat'>
         <div className='sendbird-support-chat__channel-list'>
           <ChannelList
-            onChannelSelect={(channel) => setChannelUrl(channel?.url)}
+            onChannelSelect={(channel) => setChannelUrl(channel?.url ?? '')}
             renderHeader={ChannelListHeader}
             isTypingIndicatorEnabled
           />
